@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matcher - Employer Signup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #e5e5e5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #e5e5e5;
+            width: 100%;
+            max-width: 1200px;
+            min-height: 700px;
+            border: 3px solid #333;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px;
+            background-color: #e5e5e5;
+            border-bottom: 3px solid #333;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: #555;
+            margin: 0;
+        }
+
+        .signup-form {
+            display: flex;
+            flex: 1;
+        }
+
+        .left-section {
+            background-color: #e5e5e5;
+            padding: 30px 25px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .right-section {
+            background-color: #e5e5e5;
+            padding: 30px 25px;
+            border-left: 3px solid #333;
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #ccc;
+            font-size: 1rem;
+            color: #333;
+            border-radius: 0;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: 2px solid #666;
+            background-color: #d5d5d5;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+            font-family: inherit;
+        }
+
+        .long-question {
+            margin-bottom: 25px;
+        }
+
+        .long-question label {
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .associates-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #999;
+        }
+
+        .associates-section h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .associate-group {
+            background-color: #d5d5d5;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .associate-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .associate-fields .form-group {
+            margin-bottom: 0;
+        }
+
+        .add-more-btn {
+            background-color: #999;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .add-more-btn:hover {
+            background-color: #777;
+        }
+
+        .remove-btn {
+            background-color: #cc4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 0;
+            float: right;
+        }
+
+        .remove-btn:hover {
+            background-color: #aa3333;
+        }
+
+        .submit-btn {
+            background-color: #666;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .signup-form {
+                flex-direction: column;
+            }
+
+            .right-section {
+                border-left: none;
+                border-top: 3px solid #333;
+            }
+
+            .associate-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Signup</h1>
+            <p>We need some information about you to start!</p>
+        </div>
+
+        <div class="signup-form">
+            <div class="left-section">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Position:</label>
+                    <input type="text" id="position" name="position" placeholder="e.g., HR Manager, CEO" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select your country</option>
+                        <option value="us">United States</option>
+                        <option value="ca">Canada</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="au">Australia</option>
+                        <option value="de">Germany</option>
+                        <option value="fr">France</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="field">Field</label>
+                    <input type="text" id="field" name="field" placeholder="e.g., Technology, Healthcare, Finance" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="company-site">Company Site</label>
+                    <input type="url" id="company-site" name="company-site" placeholder="https://yourcompany.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="headquarters">Head quarters location</label>
+                    <input type="text" id="headquarters" name="headquarters" placeholder="City, State/Country" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="hiring-location">Hiring location</label>
+                    <input type="text" id="hiring-location" name="hiring-location" placeholder="Remote, On-site, or Hybrid" required>
+                </div>
+
+                <div class="associates-section">
+                    <h3>Associates</h3>
+                    <div id="associates-container">
+                        <div class="associate-group">
+                            <button type="button" class="remove-btn" onclick="removeAssociate(this)" style="display: none;">Remove</button>
+                            <div class="associate-fields">
+                                <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" name="associate-name[]" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" name="associate-email[]" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone:</label>
+                                    <input type="tel" name="associate-phone[]" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Position:</label>
+                                    <input type="text" name="associate-position[]" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-more-btn" onclick="addAssociate()">Add more+</button>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="form-group long-question">
+                    <label for="company-culture">Describe your company culture in 3 words</label>
+                    <input type="text" id="company-culture" name="company-culture" maxlength="50" required>
+                </div>
+
+                <div class="form-group long-question">
+                    <label for="company-atmosphere">Describe the atmosphere of your company in 3 words</label>
+                    <input type="text" id="company-atmosphere" name="company-atmosphere" maxlength="50" required>
+                </div>
+
+                <div class="form-group long-question">
+                    <label for="company-direction">Direction of the company?</label>
+                    <textarea id="company-direction" name="company-direction" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group long-question">
+                    <label for="software-lessons">In 30 words, tell me 3, unique lessons you've learned building software</label>
+                    <textarea id="software-lessons" name="software-lessons" rows="4" maxlength="200" required></textarea>
+                </div>
+
+                <div class="form-group long-question">
+                    <label for="general-experience">Favourite experience in general</label>
+                    <textarea id="general-experience" name="general-experience" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let associateCount = 1;
+
+        function addAssociate() {
+            associateCount++;
+            const container = document.getElementById('associates-container');
+            const newAssociate = document.createElement('div');
+            newAssociate.className = 'associate-group';
+            newAssociate.innerHTML = `
+                <button type="button" class="remove-btn" onclick="removeAssociate(this)">Remove</button>
+                <div class="associate-fields">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" name="associate-name[]" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" name="associate-email[]" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="tel" name="associate-phone[]" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Position:</label>
+                        <input type="text" name="associate-position[]" required>
+                    </div>
+                </div>
+            `;
+            container.appendChild(newAssociate);
+            
+            // Show remove button on first associate if there are now multiple
+            if (associateCount === 2) {
+                document.querySelector('.remove-btn').style.display = 'block';
+            }
+        }
+
+        function removeAssociate(button) {
+            if (associateCount > 1) {
+                button.parentElement.remove();
+                associateCount--;
+                
+                // Hide remove button on first associate if it's the only one left
+                if (associateCount === 1) {
+                    document.querySelector('.remove-btn').style.display = 'none';
+                }
+            }
+        }
+
+document.querySelector('.submit-btn').addEventListener('click', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    
+    // Add all fields
+    const fields = ['name', 'email', 'phone', 'position', 'country', 'company', 'field', 'company-site', 'headquarters', 'hiring-location', 'company-culture', 'company-atmosphere', 'company-direction', 'software-lessons', 'general-experience'];
+    
+    for (const field of fields) {
+        const input = document.getElementById(field);
+        if (input && input.value.trim()) {
+            formData.append(field, input.value.trim());
+                console.log(input.value);
+        }
+    }
+
+    console.log(formData);
+    
+    formData.append('role', 'employer');
+    
+    try {
+        const response = await fetch('/signup-employer', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        console.log(data);
+    } catch (err) {
+        console.error('Error submitting form:', err);
+    }
+});
+    </script>
+</body>
+</html>
